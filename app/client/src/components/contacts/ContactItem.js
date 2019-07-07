@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Components
-
 const ContactItem = ({ contact }) => {
   const { id, name, email, phone, type } = contact;
 
@@ -14,7 +12,7 @@ const ContactItem = ({ contact }) => {
           style={{ float: 'right' }}
           className={
             'badge ' +
-            (type === 'Professional' ? 'badge-success' : 'badge-primary')
+            (type === 'professional' ? 'badge-success' : 'badge-primary')
           }
         >
           {type.charAt(0).toUpperCase() + type.slice(1)}
