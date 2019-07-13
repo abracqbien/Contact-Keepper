@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import uuid from 'uuid';
+import axios from 'axios';
 
 // Contexts
 import ContactContext from './contactContext';
@@ -14,54 +14,41 @@ import {
   CLEAR_CURRENT,
   UPDATE_CONTACT,
   FILTER_CONTACTS,
+  CONTACT_ERROR,
   CLEAR_FILTER
 } from '../types';
 
 const ContactState = props => {
   const initialState = {
-    contacts: [
-      {
-        id: '1',
-        type: 'personal',
-        name: 'Hary White',
-        email: 'harry@gmail.com',
-        phone: '222-222-2555'
-      },
-      {
-        id: '2',
-        type: 'personal',
-        name: 'Hary White',
-        email: 'harry@gmail.com',
-        phone: '222-222-2555'
-      },
-      {
-        id: '3',
-        type: 'professional',
-        name: 'Ted Johnson',
-        email: 'ted@gmail.com',
-        phone: '222-222-2222'
-      },
-      {
-        id: '4',
-        type: 'professional',
-        name: 'Sara Smith',
-        email: 'ssmith@gmail.com',
-        phone: '111-111-1111'
-      }
-    ],
+    contacts: [],
     current: null,
-    filtered: null
+    filtered: null,
+    error: null
   };
 
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
   // Add Contact
-  const addContact = contact => {
-    contact.id = uuid.v4();
-    dispatch({
-      type: ADD_CONTACT,
-      payload: contact
-    });
+  const addContact = async contact => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.post('/api/contacts', contact, config);
+
+      dispatch({
+        type: ADD_CONTACT,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg
+      });
+    }
   };
 
   // Delete Contact
@@ -118,7 +105,8 @@ const ContactState = props => {
         clearCurrent,
         filtered: state.filtered,
         filterContacts,
-        clearFilter
+        clearFilter,
+        error: state.error
       }}
     >
       {props.children}
