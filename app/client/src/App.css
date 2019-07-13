@@ -41,6 +41,12 @@ img {
   width: 100%;
 }
 
+.containerContactItem {
+  overflow-y: auto;
+  max-height: 75vh;
+  padding-right: 2%;
+}
+
 /* Utilities */
 .container {
   max-width: 1100px;

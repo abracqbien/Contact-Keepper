@@ -23,7 +23,7 @@ const Contacts = () => {
   }
 
   return (
-    <Fragment>
+    <div className='containerContactItem'>
       {contacts !== null && !loading ? (
         <TransitionGroup>
           {filtered !== null
@@ -41,7 +41,7 @@ const Contacts = () => {
       ) : (
         <Spinner />
       )}
-    </Fragment>
+    </div>
   );
 };
 
