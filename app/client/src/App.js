@@ -17,6 +17,9 @@ import AlertState from './context/alert/AlertState';
 // Utils
 import setAuthToken from './utils/setAuthToken';
 
+// Private Route
+import PrivateRoute from './components/routing/PrivateRoute';
+
 // Style
 import './App.css';
 
@@ -35,7 +38,7 @@ const App = () => {
               <div className='container'>
                 <Alerts />
                 <Switch>
-                  <Route exact path='/' component={Home} />
+                  <PrivateRoute exact path='/' component={Home} />
                   <Route exact path='/about' component={About} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
