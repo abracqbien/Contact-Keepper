@@ -2,9 +2,9 @@
 
 Launch the project :
 
-1. npm i    in app
-2. npm i    in client
-3. cd ..    in app
-4. npm run dev
+1. <b>npm i</b>    in app
+2. <b>npm i</b>    in client
+3. <b>cd ..</b>    in app
+4. <b>npm run dev</b>
 
 React V16.8+
